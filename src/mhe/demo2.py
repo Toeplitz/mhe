@@ -94,6 +94,7 @@ def goTpdPick():
   print(len(f))
   print(len(f[0]))
   dump_matrix("./tp_seismic.txt", f)
+  dump_matrix("./tp_slopes.txt", p2)
 #   writeImage("tp73_martin", f)
 #   plot(s1,s2,f,title=title1,w1=800,w2=420,png="seis")
 #   plot(s1,s2,f,h=cv1s,title=title2,k2=k2,k1=k1,w1=800,w2=420,png="tpdm")
@@ -345,6 +346,7 @@ def writeImage(name, image):
   return image
 
 def dump_matrix(fname, f):
+  print(fname)
   fh = open(fname, 'w+')
   for ix in range(0, len(f)):
     for iy in range(0, len(f[0])):
