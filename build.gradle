@@ -8,8 +8,8 @@ sourceCompatibility = 1.8
 
 sourceSets {
   main {
-    output.classesDir = 'build/classes'
-    output.resourcesDir = output.classesDir
+    // output.classesDir = 'build/classes'
+    output.resourcesDir = 'build/classes'
     java {
       srcDir 'src'
       exclude '**/new/**','**/old/**'

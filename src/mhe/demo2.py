@@ -42,6 +42,7 @@ def goTpdPick():
   s1 = Sampling(240,1.0,0.0)
   s2 = Sampling(357,1.0,0.0)
   n1,n2 = s1.count,s2.count
+  print(n1)
   f = readImage(ffile)
   p2 = zerofloat(n1,n2)
   wp = zerofloat(n1,n2)
@@ -83,10 +84,21 @@ def goTpdPick():
   title2 = "LS horizon with local slopes & multi-grid correlations"
   title3 = "LS horizon with local slopes only"
   title4 = "Predictive horizon with local slopes only"
-  plot(s1,s2,f,title=title1,w1=800,w2=420,png="seis")
-  plot(s1,s2,f,h=cv1s,title=title2,k2=k2,k1=k1,w1=800,w2=420,png="tpdm")
-  plot(s1,s2,f,h=cv2s,title=title3,k2=k2,k1=k1,w1=800,w2=420,png="tpds")
-  plot(s1,s2,f,h=cv3s,title=title4,k2=k2,k1=k1,w1=800,w2=420,png="tpdp")
+
+  print(type(f))
+  print(type(s1))
+  print(type(s2))
+  print(type(cv1s))
+
+
+  print(len(f))
+  print(len(f[0]))
+  dump_matrix("./tp_seismic.txt", f)
+#   writeImage("tp73_martin", f)
+#   plot(s1,s2,f,title=title1,w1=800,w2=420,png="seis")
+#   plot(s1,s2,f,h=cv1s,title=title2,k2=k2,k1=k1,w1=800,w2=420,png="tpdm")
+#   plot(s1,s2,f,h=cv2s,title=title3,k2=k2,k1=k1,w1=800,w2=420,png="tpds")
+#   plot(s1,s2,f,h=cv3s,title=title4,k2=k2,k1=k1,w1=800,w2=420,png="tpdp")
 
 # example two: F3 dataset
 def goF3dPick():
@@ -143,6 +155,7 @@ def goF3dPick():
   title2 = "LS horizon with local slopes & multi-grid correlations"
   title3 = "LS horizon with local slopes only"
   title4 = "Predictive horizon with local slopes only"
+
   plot(s1,s2,pow(el,4),title=title1,w1=420,w2=650,cmin=0.01,cmax=1.0,png="f3dEl")
   plot(s1,s2,f,h=cv1s,title=title2,k2=p2s,k1=p1s,w1=420,w2=650,png="f3dm")
   plot(s1,s2,f,h=cv2s,title=title3,k2=p2s,k1=p1s,w1=420,w2=650,png="f3ds")
@@ -323,12 +336,22 @@ def readImageL(name):
   ais.close()
   return image
 
-def writeImage(name,image):
+
+def writeImage(name, image):
   fileName = seismicDir+name+".dat"
   aos = ArrayOutputStream(fileName)
   aos.writeFloats(image)
   aos.close()
   return image
+
+def dump_matrix(fname, f):
+  fh = open(fname, 'w+')
+  for ix in range(0, len(f)):
+    for iy in range(0, len(f[0])):
+        str = "%f\n" % f[ix][iy]
+        fh.write(str)
+  fh.close()
+
 
 #############################################################################
 # Run the function main on the Swing thread
